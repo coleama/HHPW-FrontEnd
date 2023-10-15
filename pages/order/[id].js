@@ -3,16 +3,21 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getAllItemsOnOrder } from '../../api/OrderData';
-import ItemCard from '../../components/cards/itemCard';
+import { getAllItems } from '../../api/ItemData';
+import AddItemCard from '../../components/cards/additemCard';
+import RemoveItemCard from '../../components/cards/removeItemCard';
 
 export default function ViewOrder() {
   const router = useRouter();
   const { id } = router.query;
-  const [orderData, setOrderData] = useState({});
-
+  const [orderData, setOrderData] = useState([]);
+  const [allItems, setAllItems] = useState([]);
   useEffect(() => {
     getAllItemsOnOrder(id).then(setOrderData);
   }, [id]);
+  useEffect(() => {
+    getAllItems().then(setAllItems);
+  }, []);
   console.warn(orderData);
 
   const itemsArray = orderData.map((order) => order.items?.map((item) => ({
@@ -39,14 +44,23 @@ export default function ViewOrder() {
           <p>Type: {order.orderTypeId === 1 ? 'In Person' : order.orderTypeId === 2 ? 'Online' : order.orderTypeId === 3 ? 'Phone' : 'Unknown'}</p>
           <p>Tip: {order.tip}</p>
           <p>Total: {calculateTotal(order)}</p>
-
+          <div>
+            <div className="d-flex flex-wrap">
+              <h2>Items On Order</h2>
+              {itemsArray?.map((item) => (
+                <RemoveItemCard key={item.id} itemObj={item} onUpdate={getAllItemsOnOrder} orderObj={order} />
+              ))}
+            </div>
+            <h4>Add Items</h4>
+            <div className="d-flex flex-wrap">
+              {allItems?.map((items) => (
+                <AddItemCard key={items.id} itemObj={items} onUpdate={getAllItemsOnOrder} orderObj={order} />
+              ))}
+            </div>
+          </div>
         </div>
       ))}
-      <div className="d-flex flex-wrap">
-        {itemsArray?.map((item) => (
-          <ItemCard key={item.id} itemObj={item} onUpdate={getAllItemsOnOrder} />
-        ))}
-      </div>
+
     </>
   );
 }

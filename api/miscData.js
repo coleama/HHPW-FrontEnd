@@ -33,8 +33,20 @@ const getAllOrderTypes = () => new Promise((resolve, reject) => {
     .then((data) => resolve(Object.values(data)))
     .catch(reject);
 });
+const getAllCategories = () => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/category`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
 export {
   getAllOrderTypes,
   getAllPaymentTypes,
   getAllStatus,
+  getAllCategories,
 };

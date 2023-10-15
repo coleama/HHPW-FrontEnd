@@ -22,6 +22,18 @@ const getSingleItem = (id) => new Promise((resolve, reject) => {
     .then((data) => resolve(data))
     .catch(reject);
 });
+const getCategoryItem = (id) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/menuItemCategory/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 const createItem = (payload) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/menuItem`, {
     method: 'POST',
@@ -67,6 +79,16 @@ const deleteItem = (id) => new Promise((resolve, reject) => {
     .then((data) => resolve(data))
     .catch(reject);
 });
+const deleteItemFromOrder = (orderId, itemId) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/MenuItemsOrder/${orderId}/${itemId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((data) => resolve(data))
+    .catch(reject);
+});
 
 export {
   getAllItems,
@@ -74,4 +96,6 @@ export {
   createItem,
   updateItem,
   deleteItem,
+  getCategoryItem,
+  deleteItemFromOrder,
 };

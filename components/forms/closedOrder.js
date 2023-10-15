@@ -9,8 +9,9 @@ import { updateOrder } from '../../api/OrderData';
 import { getAllPaymentTypes, getAllStatus } from '../../api/miscData';
 
 const initialState = {
-  customerName: '',
-  customerPhoneNumber: '',
+  orderStatusId: '',
+  paymentTypeId: '',
+  tip: '',
 };
 
 export default function CloseOrderForm({ obj }) {
@@ -40,7 +41,7 @@ export default function CloseOrderForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Post</h2>
+      <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Order</h2>
       <Form.Group className="mb-3" controlId="formGridLevel">
         <Form.Select
           aria-label="Category"
@@ -104,9 +105,6 @@ export default function CloseOrderForm({ obj }) {
 CloseOrderForm.propTypes = {
   obj: PropTypes.shape({
     id: PropTypes.number,
-    customerName: PropTypes.string,
-    orderTypeId: PropTypes.number,
-    customerPhoneNumber: PropTypes.string,
     paymentTypeId: PropTypes.number,
     orderStatusId: PropTypes.number,
     tip: PropTypes.number,

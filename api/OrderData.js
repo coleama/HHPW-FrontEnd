@@ -77,6 +77,16 @@ const getAllItemsOnOrder = (id) => new Promise((resolve, reject) => {
     .then((data) => resolve(Object.values(data)))
     .catch(reject);
 });
+const addItemsToOrder = (itemId, orderId) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/MenuItemsOrder/${itemId}/${orderId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((data) => resolve(data))
+    .catch(reject);
+});
 
 export {
   createOrder,
@@ -86,4 +96,5 @@ export {
   dbUrl,
   deleteOrder,
   getAllItemsOnOrder,
+  addItemsToOrder,
 };
