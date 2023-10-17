@@ -47,13 +47,8 @@ const updateOrder = (payload) => new Promise((resolve, reject) => {
     },
     body: JSON.stringify(payload),
   })
-    .then(async (res) => {
-      let data;
-      if (res.ok) {
-        data = await res.json();
-        resolve(data);
-      }
-    })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
     .catch(reject);
 });
 const deleteOrder = (id) => new Promise((resolve, reject) => {

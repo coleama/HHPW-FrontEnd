@@ -22,9 +22,11 @@ export default function RemoveItemCard({ itemObj, orderObj, onUpdate }) {
           <Link href={`/item/editItem/${itemObj.id}`} passHref>
             <Button variant="info">EDIT</Button>
           </Link>
-          <Button variant="danger" onClick={removeItems} className="m-2">
-            Remove
-          </Button>
+          {orderObj.orderStatusId === 1 && (
+            <Button variant="danger" onClick={removeItems} className="m-2">
+              Remove
+            </Button>
+          )}
         </Card.Body>
       </Card>
     </>
@@ -43,5 +45,6 @@ RemoveItemCard.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   orderObj: PropTypes.shape({
     id: PropTypes.number,
+    orderStatusId: PropTypes.number,
   }).isRequired,
 };

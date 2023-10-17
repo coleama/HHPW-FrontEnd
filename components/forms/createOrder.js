@@ -36,16 +36,15 @@ export default function OrderForm({ obj }) {
     e.preventDefault();
     if (obj.id) {
       updateOrder(formInput)
-        .then(() => router.push('/'));
+        .then(() => router.push('/OrdersOnDom'));
     } else {
       const payload = {
         ...formInput, datePlaced: new Date(Date.now()), orderStatusId: 1, userId: 1, tip: 0.0, paymentTypeId: 1,
       };
       createOrder(payload).then(() => {
-        router.push('/');
+        router.push('/OrdersOnDom');
       });
     }
-    console.warn(type);
   };
 
   return (

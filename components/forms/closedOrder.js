@@ -36,22 +36,23 @@ export default function CloseOrderForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateOrder(formInput)
-      .then(() => router.push('/'));
+      .then(() => router.push('/OrdersOnDom'));
   };
-
+  console.warn(obj, 'this');
   return (
     <Form onSubmit={handleSubmit}>
       <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Order</h2>
-      <Form.Group className="mb-3" controlId="formGridLevel">
-        <Form.Select
-          aria-label="Category"
-          name="paymentTypeId"
-          onChange={handleChange}
-          className="mb-3"
-          value={obj.paymentTypeId}
-        >
-          <option value="">Select a Payment Type</option>
-          {
+      <Row className="mb-3">
+        <Form.Group className="mb-3" controlId="formGridLevel">
+          <Form.Select
+            aria-label="Payment"
+            name="paymentTypeId"
+            onChange={handleChange}
+            className="mb-3"
+            value={obj.paymentTypeId}
+          >
+            <option value="">Select a Payment Type</option>
+            {
             payment.map((types) => (
               <option
                 key={types.id}
@@ -61,29 +62,34 @@ export default function CloseOrderForm({ obj }) {
               </option>
             ))
           }
-        </Form.Select>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formGridLevel">
-        <Form.Select
-          aria-label="Category"
-          name="orderStatusId"
-          onChange={handleChange}
-          className="mb-3"
-          value={obj.orderStatusId}
-        >
-          <option value="">Select Closed if Closing</option>
-          {
-            status.map((Statuses) => (
+          </Form.Select>
+        </Form.Group>
+      </Row>
+      <Row className="mb-3">
+        <Form.Group className="mb-3" controlId="formGridLevel">
+          <Form.Select
+            aria-label="Status"
+            name="orderStatusId"
+            onChange={handleChange}
+            className="mb-3"
+            value={obj.orderStatusId}
+            required
+          >
+            <option value="">Select Closed if Closing</option>
+            {
+            status.map((types) => (
               <option
-                key={Statuses.id}
-                value={Statuses.id}
+                key={types.id}
+                value={types.id}
               >
-                {Statuses.status}
+                {types.status}
               </option>
             ))
           }
-        </Form.Select>
-      </Form.Group>
+          </Form.Select>
+        </Form.Group>
+      </Row>
+
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridContent">
           <Form.Label>Enter Tip</Form.Label>

@@ -44,7 +44,7 @@ export default function ItemForm({ obj }) {
         ...formInput,
       };
       createItem(payload).then(() => {
-        router.push('/');
+        router.push('/itemsOnDom');
       });
     }
     console.warn(type);

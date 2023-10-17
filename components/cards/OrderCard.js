@@ -28,11 +28,12 @@ export default function OrderCard({ orderObj, onUpdate }) {
           </div>
           <br />
           <div className="d-grid gap-2">
-            <Link href={`/order/closeOrder/${orderObj.id}`} passHref>
-              <Button variant="info">CLOSE</Button>
-            </Link>
+            {orderObj.orderStatusId === 1 && (
+              <Link href={`/order/closeOrder/${orderObj.id}`} passHref>
+                <Button variant="info">CLOSE</Button>
+              </Link>
+            )}
           </div>
-
           <Button variant="danger" onClick={deleteThisOrder} className="m-2">
             DELETE
           </Button>
@@ -46,7 +47,7 @@ OrderCard.propTypes = {
   orderObj: PropTypes.shape({
     id: PropTypes.number,
     customerName: PropTypes.string,
-
+    orderStatusId: PropTypes.number,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

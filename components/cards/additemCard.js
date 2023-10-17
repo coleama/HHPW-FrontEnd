@@ -22,9 +22,12 @@ export default function AddItemCard({ itemObj, orderObj, onUpdate }) {
           <Link href={`/item/editItem/${itemObj.id}`} passHref>
             <Button variant="info">EDIT</Button>
           </Link>
+          {orderObj.orderStatusId === 1 && (
           <Button variant="danger" onClick={addItems} className="m-2">
             ADD
           </Button>
+          )}
+
         </Card.Body>
       </Card>
     </>
@@ -43,5 +46,6 @@ AddItemCard.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   orderObj: PropTypes.shape({
     id: PropTypes.number,
+    orderStatusId: PropTypes.number,
   }).isRequired,
 };

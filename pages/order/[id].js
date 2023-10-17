@@ -19,7 +19,9 @@ export default function ViewOrder() {
     getAllItems().then(setAllItems);
   }, []);
   console.warn(orderData);
-
+  const changeItems = () => {
+    getAllItemsOnOrder(id).then(setOrderData);
+  };
   const itemsArray = orderData.map((order) => order.items?.map((item) => ({
     id: item.id,
     name: item.name,
@@ -48,13 +50,13 @@ export default function ViewOrder() {
             <div className="d-flex flex-wrap">
               <h2>Items On Order</h2>
               {itemsArray?.map((item) => (
-                <RemoveItemCard key={item.id} itemObj={item} onUpdate={getAllItemsOnOrder} orderObj={order} />
+                <RemoveItemCard key={item.id} itemObj={item} onUpdate={changeItems} orderObj={order} />
               ))}
             </div>
             <h4>Add Items</h4>
             <div className="d-flex flex-wrap">
               {allItems?.map((items) => (
-                <AddItemCard key={items.id} itemObj={items} onUpdate={getAllItemsOnOrder} orderObj={order} />
+                <AddItemCard key={items.id} itemObj={items} onUpdate={changeItems} orderObj={order} />
               ))}
             </div>
           </div>
