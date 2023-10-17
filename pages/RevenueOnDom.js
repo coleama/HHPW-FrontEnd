@@ -25,11 +25,21 @@ export default function ViewRevenue() {
     2: 0,
     3: 0,
   };
+  const reviews = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+  };
   closedOrders.forEach((order) => {
     payments[order.paymentTypeId] += 1;
   });
   closedOrders.forEach((order) => {
     counts[order.orderTypeId] += 1;
+  });
+  closedOrders.forEach((order) => {
+    reviews[order.starNumberId] += 1;
   });
   console.warn(orderData);
   const totalMoney = totalPrice + totalTip;
@@ -51,6 +61,14 @@ export default function ViewRevenue() {
           <li>Cash: {counts[1]}</li>
           <li>Credit Card: {counts[2]}</li>
           <li>Apple Pay: {counts[3]}</li>
+        </ul>
+        <p>Review Type Counts:</p>
+        <ul>
+          <li>bad: {reviews[1]}</li>
+          <li>okay: {reviews[2]}</li>
+          <li>good: {reviews[3]}</li>
+          <li>great: {reviews[4]}</li>
+          <li>best: {reviews[5]}</li>
         </ul>
       </div>
     </>

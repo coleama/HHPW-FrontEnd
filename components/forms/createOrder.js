@@ -39,7 +39,7 @@ export default function OrderForm({ obj }) {
         .then(() => router.push('/OrdersOnDom'));
     } else {
       const payload = {
-        ...formInput, datePlaced: new Date(Date.now()), orderStatusId: 1, userId: 1, tip: 0.0, paymentTypeId: 1,
+        ...formInput, datePlaced: new Date(Date.now()), orderStatusId: 1, userId: 1, tip: 0.0, paymentTypeId: 1, starNumberId: 1,
       };
       createOrder(payload).then(() => {
         router.push('/OrdersOnDom');

@@ -103,6 +103,19 @@ export default function CloseOrderForm({ obj }) {
           />
         </Form.Group>
       </Row>
+      <Row className="mb-3">
+        <Form.Group as={Col} controlId="formGridContent">
+          <Form.Label>Enter 1-5 bad to good</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter 1-5"
+            name="starNumberId"
+            value={formInput.starNumberId}
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
+      </Row>
       <Button type="submit">{obj.id ? 'Update' : 'Create'} Order</Button>
     </Form>
   );
@@ -114,6 +127,7 @@ CloseOrderForm.propTypes = {
     paymentTypeId: PropTypes.number,
     orderStatusId: PropTypes.number,
     tip: PropTypes.number,
+    starNumberId: PropTypes.number,
   }),
 };
 CloseOrderForm.defaultProps = {
